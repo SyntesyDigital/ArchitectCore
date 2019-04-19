@@ -12,39 +12,6 @@
 
       <div class="dashboard-items">
         <div class="row">
-
-            @if(Auth::user()->hasRole(["admin","recruiter"]))
-
-              @include('architect::partials.dashboard-counter',[
-                "name" => "Offres",
-                "value" => Modules\RRHH\Entities\Offers\Offer::all()->count(),
-                "icon" => "fa-file-o",
-                "route" => route('rrhh.admin.offers.index')
-              ])
-
-              @include('architect::partials.dashboard-counter',[
-                "name" => 'Candidatures',
-                "value" => Modules\RRHH\Entities\Offers\Application::all()->count(),
-                "icon" => "fa-address-card",
-                "route" => route('rrhh.admin.applications.index')
-              ])
-
-              @include('architect::partials.dashboard-counter',[
-                "name" => 'Candidats',
-                "value" => Modules\RRHH\Entities\Offers\Candidate::all()->count(),
-                "icon" => "fa-user",
-                "route" => route('rrhh.admin.candidates.index')
-              ])
-
-              @include('architect::partials.dashboard-counter',[
-                "name" => "Clients",
-                "value" => Modules\RRHH\Entities\Customer::all()->count(),
-                "icon" => "fa-user-o",
-                "route" => route('rrhh.admin.customers.index')
-              ])
-
-            @endif
-
             @if(Auth::user()->hasRole(["admin"]))
               <div class="col-xs-6">
                 <!-- React Table.js -->
