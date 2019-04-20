@@ -1,50 +1,39 @@
+let mix = require('laravel-mix');
+
 exports.build = {
-    shell : [
-        'php artisan lang:js public/modules/architect/js/lang.dist.js -s Modules/Architect/Resources/lang'
-    ],
+    run : function(){
+        mix.webpackConfig({
+            plugins: [
+                new WebpackShellPlugin({
+                    onBuildStart: [
+                        'php artisan lang:js public/modules/architect/js/lang.dist.js -s Modules/Architect/Resources/lang',
+                    ],
+                    onBuildEnd: []
+                })
+            ]
+        });
 
-    copy: [
-        /*
-         *
-         * EXEMPLE :
-         *
-         *
-        {
-            from: 'Modules/RRHH/Resources/assets/js/admin/',
-            to: './modules/rrhh/js/admin/',
-            toType: 'dir'
-        },
-        {
-            from: 'Modules/RRHH/Resources/assets/js/libs/',
-            to: './modules/rrhh/js/libs/',
-            toType: 'dir'
-        },
-        */
-    ],
-
-    react : {
-        src : 'Modules/Architect/Resources/assets/js/app.js',
-        path : 'modules/architect/js'
+        mix.react('Modules/Architect/Resources/assets/js/app.js', 'modules/architect/js')
+            .sass('Modules/Architect/Resources/assets/sass/architect/app.scss', 'modules/architect/css')
+            .scripts([
+                'Modules/Architect/Resources/assets/js/architect/architect.js',
+                'Modules/Architect/Resources/assets/js/architect/architect.dialog.js',
+                'Modules/Architect/Resources/assets/js/architect/architect.medias.js',
+                'Modules/Architect/Resources/assets/js/architect/architect.contents.js',
+                'Modules/Architect/Resources/assets/js/architect/architect.tags.js',
+                'Modules/Architect/Resources/assets/js/architect/architect.users.js',
+                'Modules/Architect/Resources/assets/js/architect/architect.pageLayouts.js',
+                'Modules/Architect/Resources/assets/js/architect/architect.menu.js',
+                'Modules/Architect/Resources/assets/js/architect/architect.languages.js',
+                'Modules/Architect/Resources/assets/js/architect/architect.translations.js'
+            ], 'public/modules/rrhh/js/admin.js');
     },
 
-    sass : {
-        src : 'Modules/Architect/Resources/assets/sass/architect/app.scss',
-        path : 'modules/architect/css'
+    shell : {
+        onBuildStart: [
+            'php artisan lang:js public/modules/architect/js/lang.dist.js -s Modules/Architect/Resources/lang'
+        ]
     },
 
-    scripts: {
-        src : [
-            'Modules/Architect/Resources/assets/js/architect/architect.js',
-            'Modules/Architect/Resources/assets/js/architect/architect.dialog.js',
-            'Modules/Architect/Resources/assets/js/architect/architect.medias.js',
-            'Modules/Architect/Resources/assets/js/architect/architect.contents.js',
-            'Modules/Architect/Resources/assets/js/architect/architect.tags.js',
-            'Modules/Architect/Resources/assets/js/architect/architect.users.js',
-            'Modules/Architect/Resources/assets/js/architect/architect.pageLayouts.js',
-            'Modules/Architect/Resources/assets/js/architect/architect.menu.js',
-            'Modules/Architect/Resources/assets/js/architect/architect.languages.js',
-            'Modules/Architect/Resources/assets/js/architect/architect.translations.js'
-        ],
-        path : 'public/modules/architect/js/architect.js'
-    }
-};
+    filesCopy: [],
+}
