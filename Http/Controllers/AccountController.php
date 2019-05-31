@@ -35,7 +35,6 @@ class AccountController extends Controller
                 ->where('email', $request->get('email'))
                 ->where('id', '<>', $user->id)
                 ->count();
-
             if ($count > 0) {
                 Session::flash('notify_error', Lang::get("architect::fields.email_taken"));
                 return redirect(route('account'));
