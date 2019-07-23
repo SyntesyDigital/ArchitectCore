@@ -13,7 +13,13 @@ ArchitectCore contiene la funcionalidad basica para la implementación del CMS :
 
 ## Instalación
 
+Instalar ArchitectLaravel
+
 php artisan architect:install
+
+php artisan module:migrate Architect
+
+php artisan module:seed Architect
 
 ## Usage
 
