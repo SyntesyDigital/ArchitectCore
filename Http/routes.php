@@ -186,6 +186,16 @@ Route::group([
   Route::get('/translations/{translation?}', 'TranslationController@show')->name('translations.show');
 
 
+  // Lists
+  Route::get('/sitelists', 'SiteListController@index')->name('sitelists.index');
+  Route::get('/sitelists/create', 'SiteListController@create')->name('sitelists.create');
+  Route::post('/sitelists/store', 'SiteListController@store')->name('sitelists.store');
+  Route::get('/sitelists/{sitelist?}', 'SiteListController@show')->name('sitelists.show');
+  Route::put('/sitelists/{sitelist?}/update', 'SiteListController@update')->name('sitelists.update');
+  Route::delete('/sitelists/{sitelist?}/delete', 'SiteListController@delete')->name('sitelists.delete');
+
+
+
   //added to all users FIXME separete account and users ?
   //Route::put('/users/{user?}/update', 'UserController@update')->name('users.update');
   //Route::get('/users/{user?}', 'UserController@show')->name('users.show');

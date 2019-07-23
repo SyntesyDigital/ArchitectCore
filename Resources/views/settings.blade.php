@@ -29,7 +29,7 @@
             @endforeach()
 
             {{-- Plugins settings --}}
-            @foreach(config('architect::plugins.settings') as $setting)
+        {{--       @foreach(config('architect::plugins.settings') as $setting)
                 @if(empty($item['roles']) || Auth::user()->hasRole([$item['roles']]))
                   <div class="col-xs-3">
                       <a href="{{ route($setting["route"]) }}">
@@ -43,7 +43,7 @@
                   </div>
                 @endif
             @endforeach()
-
+ --}}
         </div>
       </div>
 
