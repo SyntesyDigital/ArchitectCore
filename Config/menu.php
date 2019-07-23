@@ -11,6 +11,15 @@ return [
     ],
 
     [
+        "route" => 'customers.index',
+        "label" => 'pepetteadmin::header.orders',
+        "patterns" => [
+            'architect/orders*'
+        ],
+        "roles" => ['admin']
+    ],
+
+    [
         "route" => 'contents',
         "label" => 'architect::header.contents',
         "patterns" => [

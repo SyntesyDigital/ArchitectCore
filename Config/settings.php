@@ -35,5 +35,10 @@ return [
         "route" => 'pagelayouts',
         "icon" => "fa-columns",
         "label" => Lang::get('architect::settings.templates'),
+    ],
+    [
+        "route" => 'sitelists.index',
+        "icon" => "fa-reorder",
+        "label" => Lang::get('architect::settings.list'),
     ]
 ];
