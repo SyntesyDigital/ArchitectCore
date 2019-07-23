@@ -8,6 +8,8 @@
 
 ## Usage
 
+Link to <a href="https://github.com/SyntesyDigital/ArchitectCore/wiki">Wiki</a>
+
 ## License
 
 
