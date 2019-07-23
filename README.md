@@ -4,9 +4,16 @@
 
 ## Descripción
 
+ArchitectCore contiene la funcionalidad basica para la implementación del CMS : 
+- Tipologias
+- Paginas con Page Builder
+- Campos dinamicos
+- Categorias y tags
+- Interfaz
+
 ## Instalación
 
-php artisan architect:intall
+php artisan architect:install
 
 ## Usage
 
