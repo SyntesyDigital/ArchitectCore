@@ -2,9 +2,11 @@
 
 # ArchitectCore
 
-## Description
+## Descripción
 
-## Installation
+## Instalación
+
+php artisan architect:intall
 
 ## Usage
 
