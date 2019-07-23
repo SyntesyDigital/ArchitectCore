@@ -15,13 +15,15 @@ ArchitectCore contiene la funcionalidad basica para la implementación del CMS :
 
 Instalar ArchitectLaravel
 
+composer install 
+
 php artisan architect:install
 
 php artisan module:migrate Architect
 
 php artisan module:seed Architect
 
-## Usage
+## Uso
 
 Link to <a href="https://github.com/SyntesyDigital/ArchitectCore/wiki">Wiki</a>
 
