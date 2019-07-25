@@ -71,13 +71,16 @@ class MediaSelectModal extends Component {
             addRemoveLinks: false,
             maxFilesize: maxFilesize,
             paramName: paramName,
+            sending: function(file, xhr, formData) {
+  				    formData.append("_token", $('meta[name="csrf-token"]').attr('content'));
+    				},
             /*
             thumbnail: function(file, dataUrl) {
                 return false;
             }*/
         };
 
-        console.log(settings);
+        //console.log(settings);
 
         this._dropzone = new Dropzone(identifier, settings);
 
@@ -148,7 +151,7 @@ class MediaSelectModal extends Component {
     	    language: {
     	        "url": "/modules/architect/plugins/datatables/locales/french.json"
     	    },
-    		processing: true,
+    		  processing: true,
           serverSide: true,
     	    pageLength: 20,
           language: {
@@ -157,13 +160,13 @@ class MediaSelectModal extends Component {
     	    ajax: this.getRoute(mediaType),
     	    columns: [
     	        // {data: 'id', name: 'id', width: '40'},
-                {data: 'preview', name: 'preview'},
-    	        {data: 'uploaded_filename', name: 'uploaded_filename'},
-                {data: 'type', name: 'type'},
-                {data: 'author', name: 'author'},
+              {data: 'preview', name: 'preview'},
+  	          {data: 'uploaded_filename', name: 'uploaded_filename'},
+              {data: 'type', name: 'type'},
+              {data: 'author', name: 'author'},
     	        {data: 'action', name: 'action', orderable: false, searchable: false}
     	    ],
-            initComplete: function(settings, json) {
+          initComplete: function(settings, json) {
 
     	    }
         });

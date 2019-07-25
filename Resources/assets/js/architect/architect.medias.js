@@ -1,6 +1,6 @@
 //------------------------------------------//
 //      ARCHITECT MEDIAS MANAGER
-//      @syntey-digital - 2018
+//      @syntey-digital - 2019
 //------------------------------------------//
 architect.medias = {
 
@@ -14,6 +14,7 @@ architect.medias = {
 
     init: function(options)
     {
+        //console.log("architect.medias.init 4");
         this._settings = $.extend({}, this._defaults, options);
         this.initDropzone();
         this.setDatatable();
@@ -33,6 +34,9 @@ architect.medias = {
             addRemoveLinks: false,
             maxFilesize: _this._settings.maxFilesize,
             paramName: _this._settings.paramName,
+            sending: function(file, xhr, formData) {
+  				    formData.append("_token", $('meta[name="csrf-token"]').attr('content'));
+    				},
             /*
             thumbnail: function(file, dataUrl) {
                 return false;

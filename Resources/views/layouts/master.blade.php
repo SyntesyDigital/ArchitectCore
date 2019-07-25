@@ -48,9 +48,14 @@
               }
             };
 
-
             var error = "";
 
+            //setup headers
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                }
+            });
 
 
             @if(isset($errors))
