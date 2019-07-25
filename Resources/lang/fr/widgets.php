@@ -38,5 +38,6 @@ return [
     'CONTACT_FORM_PRESS' => 'Formulaire de presse',
     'SEPARATOR' => 'Séparateur',
     'SEARCH' => 'Chercheur',
-    'TYPOLOGY_HORIZONTAL_CAROUSEL' => 'Carrousel typologie horizontale'
+    'TYPOLOGY_HORIZONTAL_CAROUSEL' => 'Carrousel typologie horizontale',
+    'HOME_HEADER' => 'Accueil bannière'
 ];

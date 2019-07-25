@@ -10,37 +10,37 @@ return [
             'name' => 'large',
             'directory' => 'large',
             'ratio' => '',
-            'width' => 1366,
-            'height' => 650
+            'width' => 1280,
+            'height' => 750
         ],
         [
-            'name' => 'medium',
-            'directory' => 'medium',
-            'ratio' => '16:9',
-            'width' => 768,
-            'height' => 432
+            'name' => 'square',
+            'directory' => 'square',
+            'ratio' => '1:1',
+            'width' => 500,
+            'height' => 500
         ],
         [
-            'name' => 'small',
-            'directory' => 'small',
-            'ratio' => '16:9',
-            'width' => 480,
-            'height' => 270
+            'name' => 'vertical',
+            'directory' => 'vertical',
+            'ratio' => '',
+            'width' => 400,
+            'height' => 540
+        ],
+        [
+            'name' => 'horizontal',
+            'directory' => 'horizontal',
+            'ratio' => '',
+            'width' => 540,
+            'height' => 400
         ],
         [
             'name' => 'thumbnail',
             'directory' => 'thumbnail',
             'ratio' => '1:1',
-            'width' => 225,
-            'height' => 225
-        ],
-        [
-            'name' => 'image_actu',
-            'directory' => 'image_actu',
-            'ratio' => '1:1',
-            'width' => 800,
-            'height' => 800
-        ],
+            'width' => 90,
+            'height' => 90
+        ]
     ]
 
 ];
