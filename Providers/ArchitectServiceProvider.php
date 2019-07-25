@@ -63,6 +63,8 @@ class ArchitectServiceProvider extends ServiceProvider
             \Modules\Architect\Console\ElasticSearchBuildsIndexes::class,
             \Modules\Architect\Console\ElasticSearchRemoveAllIndexes::class,
             \Modules\Architect\Console\BuildAllUrls::class,
+            \Modules\Architect\Console\WidgetCreate::class,
+            \Modules\Architect\Console\WidgetDelete::class,
         ]);
     }
 
