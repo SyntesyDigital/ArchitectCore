@@ -78,6 +78,7 @@
 
 @push('javascripts-libs')
 <script>
+
     architect.medias.init({
         'identifier' : '.medias-dropfiles',
         'table' : $('#table-medias'),
