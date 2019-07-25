@@ -87,6 +87,10 @@
         <!--script src="{{ asset('modules/rrhh/js/app.js') }}" defer></script>
         <script src="{{ asset('modules/documents/js/app.js') }}" defer></script-->
 
+          <!-- Widgets -->
+        <script src="{{ asset('widgets/widgets.js') }}" defer></script>
+        <link rel="stylesheet" media="all" href="{{ asset('widgets/widgets.css')}}" />
+
         @stack('stylesheets')
 
         @stack('plugins')
