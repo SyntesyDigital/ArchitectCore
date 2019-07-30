@@ -102,5 +102,8 @@ return [
     'default_template' => 'Modèle par défaut',
     'template' => 'Modèle',
     'icon' => 'Icone',
-    'file_too_big' => 'Le fichier est trop volumineux.'
+    'file_too_big' => 'Le fichier est trop volumineux.',
+
+    'link_survey' => 'Lien de sondage'
+
 ];

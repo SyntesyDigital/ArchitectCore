@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\AliasLoader;
+use Modules\Architect\Widgets\WidgetConfig;
+
 use Config;
 
 class ArchitectServiceProvider extends ServiceProvider
@@ -31,6 +33,9 @@ class ArchitectServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $router->aliasMiddleware('DetectUserLocale', \Modules\Architect\Http\Middleware\DetectUserLocale::class);
+
+        $this->registerWidgetsTranslations();
+        $this->registerWidgetsViews();
 
         // FIXME : don't know if necesary
         //$this->registerAliases();
@@ -63,6 +68,8 @@ class ArchitectServiceProvider extends ServiceProvider
             \Modules\Architect\Console\ElasticSearchBuildsIndexes::class,
             \Modules\Architect\Console\ElasticSearchRemoveAllIndexes::class,
             \Modules\Architect\Console\BuildAllUrls::class,
+            \Modules\Architect\Console\WidgetCreate::class,
+            \Modules\Architect\Console\WidgetDelete::class,
         ]);
         foreach (glob(__DIR__ . '/../Helpers/*.php') as $filename) {
             require_once($filename);
@@ -117,6 +124,8 @@ class ArchitectServiceProvider extends ServiceProvider
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
             return $path . '/modules/architect';
         }, \Config::get('view.paths')), [$sourcePath]), 'architect');
+
+
     }
 
     /**
@@ -143,6 +152,27 @@ class ArchitectServiceProvider extends ServiceProvider
         if (!app()->environment('production')) {
             app(Factory::class)->load(__DIR__ . '/../Database/factories');
         }
+    }
+
+    public function registerWidgetsViews()
+    {
+       $viewPath = resource_path('views/widgets');
+       $sourcePath = base_path() . '/widgets';
+       $this->publishes([
+           $sourcePath => $viewPath
+       ],'views');
+       $this->loadViewsFrom(array_merge(array_map(function ($path) {
+           return $path . '/views/widgets';
+       }, \Config::get('view.paths')), [$sourcePath]), 'widgets');
+    }
+    /**
+    * Register all widgets translations
+    *
+    * @return void
+    */
+    public function registerWidgetsTranslations()
+    {
+       $this->loadTranslationsFrom(WidgetConfig::getBasePath() . 'lang/', 'widgets');
     }
 
     /**
