@@ -127,11 +127,11 @@ class WidgetCreate extends Command
 
                 $langDir = WidgetConfig::getBasePath() . 'lang/' . $lang . '/';
 
-                if(is_dir(langDir)) {
-                    mkdir(langDir, 0755);
+                if(!is_dir($langDir)) {
+                    mkdir($langDir, 0755);
                 }
 
-                file_put_contents(langDir . $this->getWidgetName() . '.php', $this->getTemplateContent('lang.php'));
+                file_put_contents($langDir . $this->getWidgetName() . '.php', $this->getTemplateContent('lang.php'));
             }
         }
     }
