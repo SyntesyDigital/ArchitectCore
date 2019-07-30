@@ -39,5 +39,10 @@ return [
     'SEPARATOR' => 'Séparateur',
     'SEARCH' => 'Chercheur',
     'TYPOLOGY_HORIZONTAL_CAROUSEL' => 'Carrousel typologie horizontale',
-    'HOME_HEADER' => 'Accueil bannière'
+    'HOME_HEADER' => 'Accueil bannière',
+    'CALL_TO_ACTION' => 'Bannière avec lien',
+    'RECIPES' => 'Recettes',
+    'RECIPE' => 'Recette',
+    'LOGO_TEXT' => "Logo avec texte",
+    'LOGOS_TEXT' => "Logos avec texte"
 ];
