@@ -14,6 +14,7 @@ class WidgetCreate extends Command
         'Widget.js',
         'Widget.php',
         'Widget.scss',
+        'image.jpg',
         [
             'src' => 'main.blade.php',
             'out' => 'main.blade.php'
