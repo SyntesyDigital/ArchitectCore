@@ -42,6 +42,23 @@ class RichTextField extends Component {
 
   renderInputs() {
 
+    var modules = {
+     toolbar: [
+       [{ 'header': [1, 2, 3, 4, 5, false] }],
+       ['bold', 'italic', 'underline','strike', 'blockquote'],
+       [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+       ['link'],
+       ['clean']
+     ],
+    };
+
+     var formats = [
+       'header',
+       'bold', 'italic', 'underline', 'strike', 'blockquote',
+       'list', 'bullet', 'indent',
+       'link', 'image'
+     ];
+
     var inputs = [];
 
     for(var key in this.props.translations){
@@ -59,6 +76,8 @@ class RichTextField extends Component {
             parent={this}
             value={value}
             onChange={this.handleOnChange}
+            modules={modules}
+            formats={formats}
           />
         </div>
         );
