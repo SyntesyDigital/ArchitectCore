@@ -20,6 +20,11 @@ class CreateTableMedias extends Migration
             $table->string('stored_filename');
             $table->string('uploaded_filename');
             $table->text('metadata')->nullable(); // FIXME : JSON
+            /*
+            $table->integer('author_id')->nullable();
+            $table->foreign('author_id')->references('id')->on('users');
+            */
+
             $table->timestamps();
         });
     }

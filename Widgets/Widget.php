@@ -15,9 +15,9 @@ abstract class Widget
 
     public function __construct()
     {
-        if(isset($this->fields)) {
-            $fields = [];
-            foreach($this->fields as $identifier => $class) {
+        $fields = [];
+        if (isset($this->fields)) {
+            foreach ($this->fields as $identifier => $class) {
                 $fieldObject = new $class;
 
                 $fields[] = [
@@ -27,16 +27,15 @@ abstract class Widget
                     'name' => trans('architect::fields.' . $identifier),
                 ];
             }
-
-            $this->fields = $fields;
         }
 
+        $this->fields = $fields;
     }
 
     public function getLanguageFromIso($iso, $languages)
     {
-        foreach($languages as $language) {
-            if($language->iso == $iso) {
+        foreach ($languages as $language) {
+            if ($language->iso == $iso) {
                 return $language;
             }
         }
@@ -45,10 +44,12 @@ abstract class Widget
 
     public function save($content, $identifier, $fields)
     {
-        foreach($fields as $field) {
-            $fieldName = $identifier . "_" . $field['identifier'];
-            $fieldValue = isset($field['value']) ? $field['value'] : null;
-            (new $field['class'])->save($content, $fieldName, $fieldValue);
+        foreach ($fields as $field) {
+            (new $field['class'])
+                ->save($content,
+                    $identifier . "_" . $field['identifier'],
+                    isset($field['value']) ? $field['value'] : null
+                );
         }
 
         return true;
@@ -86,7 +87,7 @@ abstract class Widget
 
     public function getHidden()
     {
-      return isset($this->hidden) ? $this->hidden : false;
+        return isset($this->hidden) ? $this->hidden : false;
     }
 
     public function getFields()
@@ -105,4 +106,5 @@ abstract class Widget
         return isset($this->widget) ? $this->widget : null;
     }
 }
+
 ?>
