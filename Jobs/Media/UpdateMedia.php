@@ -57,7 +57,7 @@ class UpdateMedia
                   }else{
                     //control width of new image
                     if($image->width() > $f['width']){
-                      $image->resize($f['widht'], null,  function ($constraint) {
+                      $image->resize($f['width'], null,  function ($constraint) {
                           $constraint->aspectRatio();
                       });
                       //we do that in case aspect ratio of selector has been modified or incorrect
