@@ -972,34 +972,6 @@ class ModalEditItem extends Component {
 
         <SelectorSettingsField
           field={this.state.field}
-          name="program"
-          source="settings"
-          onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label={Lang.get('modals.program')}
-          options={this.state.programs.map(function(obj){
-              return {
-                  value: obj.id,
-                  name: obj.description_es
-              };
-          })}
-        />
-
-        <SelectorSettingsField
-          field={this.state.field}
-          name="axe"
-          source="settings"
-          onFieldChange={this.handleFieldSettingsChange.bind(this)}
-          label={Lang.get('modals.axe')}
-          options={this.state.axes.map(function(item){
-              return {
-                  value: item.id,
-                  name: item.description_es,
-              };
-          })}
-        />
-
-        <SelectorSettingsField
-          field={this.state.field}
           name="category"
           source="settings"
           onFieldChange={this.handleFieldSettingsChange.bind(this)}
@@ -1077,6 +1049,28 @@ class ModalEditItem extends Component {
               {
                   value: "col-4",
                   name: "4 "+Lang.get('modals.columns'),
+              }
+          ]}
+        />
+
+        <SelectorSettingsField
+          field={this.state.field}
+          name="imagePosition"
+          source="settings"
+          onFieldChange={this.handleFieldSettingsChange.bind(this)}
+          label={Lang.get('modals.image_position')}
+          options={[
+              {
+                  value: "",
+                  name: "---",
+              },
+              {
+                  value: "right",
+                  name: Lang.get('modals.image_right'),
+              },
+              {
+                  value: "left",
+                  name: Lang.get('modals.image_left'),
               }
           ]}
         />

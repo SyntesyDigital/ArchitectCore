@@ -43,14 +43,17 @@ return [
   'delete_permanently_alert' => 'Estas segur d\'esborrar permanentment aquest camp ?',
   'insert_tags' => 'Introdueix etiquetes...',
   'load_template' => 'Carregar Plantilla',
-    'save_template' => 'Guardar Plantilla',
-    'new_content'   => 'Nou contingut',
-    'content_saved' => 'Contigut guardat',
-    'html_class' => 'Clase HTML',
-    'edit_slug_alert' => 'Editar el identificador, pot causar canvis importants en la maquetació final.\nVols editar el camp ?' ,
-    'max_size' => 'Mida màxima',
-    'cut media' => 'Retalla media',
-    'select_right_list' => 'Selecciona una opció de la llista de la dreta'
+  'save_template' => 'Guardar Plantilla',
+  'new_content'   => 'Nou contingut',
+  'content_saved' => 'Contigut guardat',
+  'html_class' => 'Clase HTML',
+  'edit_slug_alert' => 'Editar el identificador, pot causar canvis importants en la maquetació final.\nVols editar el camp ?' ,
+  'max_size' => 'Mida màxima',
+  'cut media' => 'Retalla media',
+  'select_right_list' => 'Selecciona una opció de la llista de la dreta',
+  'image_position' => 'Posició de la imatge',
+  'image_right' => 'Dreta',
+  'image_left' => 'Esquerra',
 
 
 ];
