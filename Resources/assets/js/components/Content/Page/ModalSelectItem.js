@@ -120,7 +120,8 @@ class ModalSelectItem extends Component {
 
         e.preventDefault();
 
-        var newField = JSON.parse(JSON.stringify(WIDGETS['SEPARATOR']));
+
+        var newField = JSON.parse(JSON.stringify(WIDGETS['Separator']));
 
         newField.rules = this.exploteToObject(newField.rules);
         newField.settings = this.exploteToObject(newField.settings);
