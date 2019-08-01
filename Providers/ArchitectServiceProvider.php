@@ -157,7 +157,7 @@ class ArchitectServiceProvider extends ServiceProvider
     public function registerWidgetsViews()
     {
        $viewPath = resource_path('views/widgets');
-       $sourcePath = base_path() . '/widgets';
+       $sourcePath = base_path() . '/Widgets';
        $this->publishes([
            $sourcePath => $viewPath
        ],'views');
