@@ -16,7 +16,7 @@ class Row extends Component {
     };
 
     this.colTypes = [
-      ['col-xs-12'],
+      ['col-xs-12 col-md-12'],
       ['col-xs-12 col-sm-6','col-xs-12 col-sm-6'],
       ['col-xs-12 col-sm-4','col-xs-12 col-sm-8'],
       ['col-xs-12 col-sm-8','col-xs-12  col-sm-4'],
