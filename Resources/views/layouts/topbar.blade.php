@@ -7,7 +7,8 @@
               <div class="row">
 
                 <div id="logo-wrapper" class="col-xs-2">
-                    <img src="{{asset('modules/architect/images/client-logo.jpg')}}" alt="Logo" />
+                    <img style="max-width: 100%;height: auto;"
+                      src="{{asset('modules/architect/images/client_logo.png')}}" alt="Logo" />
                 </div>
 
                 <div class="col-xs-8">
