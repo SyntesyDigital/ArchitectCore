@@ -17,7 +17,7 @@ if (!function_exists('getSiteListValue')) {
 
       return isset($values[$option])?$values[$option]:false ;
     }
-
+     
     function getSiteListValuesArray($identifier) {
 
       $list = SiteList::where('identifier', $identifier)->first();
