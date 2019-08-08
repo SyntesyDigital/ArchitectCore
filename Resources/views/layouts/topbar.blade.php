@@ -6,8 +6,8 @@
             <div class="container">
               <div class="row">
 
-                <div id="logo-wrapper" class="col-xs-2">
-                    <img style="max-width: 100%;height: auto;"
+                <div id="logo-wrapper" class="col-xs-2 text-center">
+                    <img style="max-width: 100%;height: auto; max-height: 100%;"
                       src="{{asset('modules/architect/images/client_logo.png')}}" alt="Logo" />
                 </div>
 
