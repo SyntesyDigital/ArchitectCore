@@ -50,7 +50,7 @@ return [
     'edit_slug_alert' => 'Editar el identificador, pot causar canvis importants en la maquetació final.\nVols editar el camp ?' ,
     'max_size' => 'Medida máxima',
     'cut media' => 'Recorta media',
-    'select_right_list' => 'Selecciona una opción de la lista de la derecha'
+    'select_right_list' => 'Selecciona una opción de la lista de la derecha',
     'image_position' => 'Posición de la imagen',
     'image_right' => 'Derecha',
     'image_left' => 'Izquierda',

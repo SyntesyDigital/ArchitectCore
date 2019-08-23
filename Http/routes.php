@@ -4,7 +4,7 @@
 Auth::routes();
 
 Route::group([
-  'middleware' => ['web', 'auth','role:recruiter|admin', 'DetectUserLocale'],
+  'middleware' => ['web', 'auth','role:admin', 'DetectUserLocale'],
   'prefix' => 'architect',
   'namespace' => 'Modules\Architect\Http\Controllers'
 ], function()
