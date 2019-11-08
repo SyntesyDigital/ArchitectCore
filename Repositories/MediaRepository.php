@@ -34,7 +34,7 @@ class MediaRepository extends BaseRepository
                 $query->whereRaw("CONCAT(users.firstname,' ',users.lastname) like ?", ["%{$keyword}%"]);
             })
             ->addColumn('author', function ($item) {
-                return $item->author->full_name;
+                return isset($item->author) ? $item->author->full_name : null;
             })
             ->addColumn('preview', function ($item) {
                 switch($item->type) {
