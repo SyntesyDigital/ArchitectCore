@@ -292,7 +292,6 @@ class ContentRepository extends BaseRepository
       foreach($pages as $page) {
 
         if(!$page->parent_id && $page->id != $homeId) {
-
           $nodes[] = [
             "id" => $page->id,
             "title" => $page->getTitleAttribute(),
