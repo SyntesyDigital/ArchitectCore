@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\AliasLoader;
 use Modules\Architect\Widgets\WidgetConfig;
-
+use Modules\Architect\Services\EncoderFileLibrary\Providers\EncoderFileLibraryProvider;
 use Config;
 
 class ArchitectServiceProvider extends ServiceProvider
@@ -21,8 +21,6 @@ class ArchitectServiceProvider extends ServiceProvider
 
     /**
      * Boot the application events.
-     *
-     * @return void
      */
     public function boot(Router $router)
     {
@@ -30,12 +28,14 @@ class ArchitectServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->registerFactories();
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 
         $router->aliasMiddleware('DetectUserLocale', \Modules\Architect\Http\Middleware\DetectUserLocale::class);
 
         $this->registerWidgetsTranslations();
         $this->registerWidgetsViews();
+
+        $this->app->register(EncoderFileLibraryProvider::class);
 
         // FIXME : don't know if necesary
         //$this->registerAliases();
@@ -43,12 +43,12 @@ class ArchitectServiceProvider extends ServiceProvider
 
     public function registerAliases()
     {
-        $this->app->booting(function() {
+        $this->app->booting(function () {
             $loader = AliasLoader::getInstance();
             $aliases = Config::get('architect.aliases');
 
-            if(is_array($aliases)) {
-                foreach($aliases as $alias => $class) {
+            if (is_array($aliases)) {
+                foreach ($aliases as $alias => $class) {
                     $loader->alias($alias, $class);
                 }
             }
@@ -57,12 +57,9 @@ class ArchitectServiceProvider extends ServiceProvider
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register()
     {
-        //
         $this->commands([
             \Modules\Architect\Console\ElasticSearchIndexAllContents::class,
             \Modules\Architect\Console\ElasticSearchBuildsIndexes::class,
@@ -71,15 +68,13 @@ class ArchitectServiceProvider extends ServiceProvider
             \Modules\Architect\Console\WidgetCreate::class,
             \Modules\Architect\Console\WidgetDelete::class,
         ]);
-        foreach (glob(__DIR__ . '/../Helpers/*.php') as $filename) {
-            require_once($filename);
+        foreach (glob(__DIR__.'/../Helpers/*.php') as $filename) {
+            require_once $filename;
         }
     }
 
     /**
      * Register config.
-     *
-     * @return void
      */
     protected function registerConfig()
     {
@@ -108,8 +103,6 @@ class ArchitectServiceProvider extends ServiceProvider
 
     /**
      * Register views.
-     *
-     * @return void
      */
     public function registerViews()
     {
@@ -118,20 +111,16 @@ class ArchitectServiceProvider extends ServiceProvider
         $sourcePath = __DIR__.'/../Resources/views';
 
         $this->publishes([
-            $sourcePath => $viewPath
-        ],'views');
+            $sourcePath => $viewPath,
+        ], 'views');
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
-            return $path . '/modules/architect';
+            return $path.'/modules/architect';
         }, \Config::get('view.paths')), [$sourcePath]), 'architect');
-
-
     }
 
     /**
      * Register translations.
-     *
-     * @return void
      */
     public function registerTranslations()
     {
@@ -139,40 +128,40 @@ class ArchitectServiceProvider extends ServiceProvider
         if (is_dir($langPath)) {
             $this->loadTranslationsFrom($langPath, 'architect');
         } else {
-            $this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'architect');
+            $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'architect');
         }
     }
 
     /**
      * Register an additional directory of factories.
+     *
      * @source https://github.com/sebastiaanluca/laravel-resource-flow/blob/develop/src/Modules/ModuleServiceProvider.php#L66
      */
     public function registerFactories()
     {
         if (!app()->environment('production')) {
-            app(Factory::class)->load(__DIR__ . '/../Database/factories');
+            app(Factory::class)->load(__DIR__.'/../Database/factories');
         }
     }
 
     public function registerWidgetsViews()
     {
-       $viewPath = resource_path('views/widgets');
-       $sourcePath = base_path() . '/Widgets';
-       $this->publishes([
-           $sourcePath => $viewPath
-       ],'views');
-       $this->loadViewsFrom(array_merge(array_map(function ($path) {
-           return $path . '/views/widgets';
-       }, \Config::get('view.paths')), [$sourcePath]), 'widgets');
+        $viewPath = resource_path('views/widgets');
+        $sourcePath = base_path().'/Widgets';
+        $this->publishes([
+           $sourcePath => $viewPath,
+       ], 'views');
+        $this->loadViewsFrom(array_merge(array_map(function ($path) {
+            return $path.'/views/widgets';
+        }, \Config::get('view.paths')), [$sourcePath]), 'widgets');
     }
+
     /**
-    * Register all widgets translations
-    *
-    * @return void
-    */
+     * Register all widgets translations.
+     */
     public function registerWidgetsTranslations()
     {
-       $this->loadTranslationsFrom(WidgetConfig::getBasePath() . 'lang/', 'widgets');
+        $this->loadTranslationsFrom(WidgetConfig::getBasePath().'lang/', 'widgets');
     }
 
     /**

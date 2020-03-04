@@ -8,8 +8,6 @@ class CreateTableMedias extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -21,8 +19,8 @@ class CreateTableMedias extends Migration
             $table->string('uploaded_filename');
             $table->text('metadata')->nullable(); // FIXME : JSON
 
-            $table->integer('author_id')->unsigned()->nullable();
-            $table->foreign('author_id')->references('id')->on('users');
+            //   $table->integer('author_id')->unsigned()->nullable();
+            //   $table->foreign('author_id')->references('id')->on('users');
 
             $table->timestamps();
         });
@@ -30,8 +28,6 @@ class CreateTableMedias extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {
