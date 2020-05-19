@@ -104,6 +104,7 @@ trait HasFields
 
         switch ($type) {
             case 'richtext':
+            case 'multimedia':
             case 'color':
             case 'slug':
             case 'text':

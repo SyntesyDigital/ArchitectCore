@@ -3,6 +3,7 @@
 return [
     'text' => 'Text',
     'richtext' => 'Richtext',
+    'multimedia' => 'Multimedia',
     'color' => 'Color',
     'image' => 'Image',
     'images' => 'Images',
