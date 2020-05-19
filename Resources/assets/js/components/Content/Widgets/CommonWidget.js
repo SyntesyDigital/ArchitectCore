@@ -6,6 +6,7 @@ import SlugField from './../ContentFields/SlugField';
 import RichTextField from './../ContentFields/RichTextField';
 import ImageField from './../ContentFields/ImageField';
 import DateField from './../ContentFields/DateField';
+import ColorField from './../ContentFields/ColorField';
 import ImagesField from './../ContentFields/ImagesField';
 import ListField from './../ContentFields/ListField';
 import ContentsField from './../ContentFields/ContentsField';
@@ -172,6 +173,17 @@ class CommonWidget extends Component
             case FIELDS.DATE.type:
                 fields.push(
                 <DateField
+                    field={stateFields[k]}
+                    translations={_this.props.translations}
+                    key={k}
+                    onFieldChange={_this.onFieldChange}
+                />
+                );
+            break;
+
+            case FIELDS.COLOR.type:
+                fields.push(
+                <ColorField
                     field={stateFields[k]}
                     translations={_this.props.translations}
                     key={k}

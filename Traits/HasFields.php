@@ -5,7 +5,6 @@ namespace Modules\Architect\Traits;
 use Modules\Architect\Entities\Media;
 use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\Language;
-
 use Illuminate\Database\Eloquent\Builder;
 use DB;
 
@@ -51,7 +50,6 @@ trait HasFields
         return $field->first();
     }
 
-
     public function getFieldValue($identifier, $languageId = null)
     {
         /*
@@ -96,7 +94,6 @@ trait HasFields
         return $field;
     }
 
-
     public function getFieldValues($identifier, $type, $languages)
     {
         $field = $this->getFieldByIdentifier($identifier);
@@ -107,10 +104,12 @@ trait HasFields
 
         switch ($type) {
             case 'richtext':
+            case 'color':
             case 'slug':
             case 'text':
                 //$values = [];
                 $field = !is_array($field) ? [$field] : $field;
+
                 return collect($field)->mapWithKeys(function ($f) use ($languages) {
                     $iso = null;
                     foreach ($languages as $l) {
@@ -136,6 +135,7 @@ trait HasFields
             case 'translated_file':
                 //$values = [];
                 $field = !is_array($field) ? [$field] : $field;
+
                 return collect($field)->mapWithKeys(function ($f) use ($languages) {
                     $iso = null;
                     foreach ($languages as $l) {
@@ -143,6 +143,7 @@ trait HasFields
                             $iso = $l->iso;
                         }
                     }
+
                     return [$iso => Media::find($f->value)->toArray()];
                 })->toArray();
             break;
@@ -154,11 +155,13 @@ trait HasFields
 
             case 'images':
                 $field = !is_array($field) ? [$field] : $field;
+
                 return Media::whereIn('id', collect($field)->pluck('value'))->get()->toArray();
             break;
 
             case 'contents':
                 $field = !is_array($field) ? [$field] : $field;
+
                 return Content::whereIn('id', collect($field)->pluck('value'))->get()->toArray();
             break;
 
@@ -180,10 +183,10 @@ trait HasFields
                                     $iso = $l->iso;
                                 }
                             }
-                            $values[ explode('.', $v->name)[1] ][$iso] = $v->value;
+                            $values[explode('.', $v->name)[1]][$iso] = $v->value;
                         } else {
                             if (strtolower(explode('.', $v->name)[1]) == 'content') {
-                                $values[ explode('.', $v->name)[1] ] = Content::find($v->value);
+                                $values[explode('.', $v->name)[1]] = Content::find($v->value);
                             }
                         }
                     }
@@ -198,7 +201,7 @@ trait HasFields
 
                 if ($childs != null) {
                     foreach ($childs as $k => $v) {
-                        $values[explode('.', $v->name)[1]][ explode('.', $v->name)[2] ] = $v->value;
+                        $values[explode('.', $v->name)[1]][explode('.', $v->name)[2]] = $v->value;
                     }
                 }
 
@@ -219,7 +222,7 @@ trait HasFields
                                 }
                             }
 
-                            $values[ explode('.', $v->name)[1] ][$iso] = $v->value;
+                            $values[explode('.', $v->name)[1]][$iso] = $v->value;
                         }
                     }
                 }
@@ -229,6 +232,7 @@ trait HasFields
 
             default:
                 $field = !is_array($field) ? [$field] : $field;
+
                 return collect($field)->mapWithKeys(function ($f) use ($languages) {
                     $iso = null;
                     foreach ($languages as $l) {
@@ -243,10 +247,8 @@ trait HasFields
         }
     }
 
-
-    public function scopeByField(Builder $query, $name, $value, $operator = "=", $boolean = 'and')
+    public function scopeByField(Builder $query, $name, $value, $operator = '=', $boolean = 'and')
     {
-
         if ($boolean == 'or') {
             return $query->orWhereHas('fields', function ($q) use ($name, $value, $operator, $boolean) {
                 $q
@@ -264,25 +266,25 @@ trait HasFields
 
     public function scopeWhereFields(Builder $query, $arr, $boolean = 'and')
     {
-        if(!$arr) {
+        if (!$arr) {
             return $query;
         }
 
         if (!is_array($arr[0])) {
-            if(sizeof($arr) > 2) {
+            if (sizeof($arr) > 2) {
                 return $query->byField($arr[0], $arr[2], $arr[1], $boolean);
             } else {
-                return $query->byField($arr[0], "=", $arr[1], $boolean);
+                return $query->byField($arr[0], '=', $arr[1], $boolean);
             }
         }
 
         $condition = 'and';
         foreach ($arr as $k => $v) {
             if (is_array($v)) {
-                if(sizeof($v) > 2) {
-                    $query->byField($v[0],$v[2], $v[1], $condition);
+                if (sizeof($v) > 2) {
+                    $query->byField($v[0], $v[2], $v[1], $condition);
                 } else {
-                    $query->byField($v[0], "=", $v[1], $condition);
+                    $query->byField($v[0], '=', $v[1], $condition);
                 }
                 $condition = 'and';
             } else {
@@ -295,12 +297,12 @@ trait HasFields
 
     public function scopeOrderByField(Builder $query, $column, $mode, $iso = null)
     {
-        if(in_array($column, $this->fillable) || $column == "id") {
+        if (in_array($column, $this->fillable) || $column == 'id') {
             return $query->orderBy($column, $mode);
         }
 
         $language = $iso ? Language::byIso($iso)->first() : Language::getDefault();
-        $columnName = $column . '_order';
+        $columnName = $column.'_order';
 
         $sql = DB::raw(sprintf('(
             SELECT

@@ -8,6 +8,7 @@ import ImageField from './ContentFields/ImageField';
 import FileField from './ContentFields/FileField';
 import TranslatedFileField from './ContentFields/TranslatedFileField';
 import DateField from './ContentFields/DateField';
+import ColorField from './ContentFields/ColorField';
 import ImagesField from './ContentFields/ImagesField';
 import ListField from './ContentFields/ListField';
 import ContentsField from './ContentFields/ContentsField';
@@ -133,6 +134,18 @@ class ContentFields extends Component {
             case FIELDS.DATE.type:
                 fields.push(
                 <DateField
+                    errors={_this.props.errors[k]}
+                    field={_this.props.fields[k]}
+                    translations={_this.props.translations}
+                    key={k}
+                    onFieldChange={_this.props.onFieldChange}
+                />
+                );
+            break;
+
+            case FIELDS.COLOR.type:
+                fields.push(
+                <ColorField
                     errors={_this.props.errors[k]}
                     field={_this.props.fields[k]}
                     translations={_this.props.translations}

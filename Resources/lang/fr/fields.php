@@ -3,6 +3,7 @@
 return [
     'text' => 'Texte',
     'richtext' => 'Richtext',
+    'color' => 'Color',
     'image' => 'Image',
     'images' => 'Images',
     'contents' => 'Contenus',
@@ -104,6 +105,5 @@ return [
     'icon' => 'Icone',
     'file_too_big' => 'Le fichier est trop volumineux.',
 
-    'link_survey' => 'Lien de sondage'
-
+    'link_survey' => 'Lien de sondage',
 ];
