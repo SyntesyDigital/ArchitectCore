@@ -6,6 +6,7 @@ import TextField from './../ContentFields/TextField';
 import RichTextField from './../ContentFields/RichTextField';
 import ImageField from './../ContentFields/ImageField';
 import DateField from './../ContentFields/DateField';
+import ColorField from './../ContentFields/ColorField';
 import ImagesField from './../ContentFields/ImagesField';
 import ListField from './../ContentFields/ListField';
 import ContentsField from './../ContentFields/ContentsField';
@@ -622,6 +623,15 @@ class ModalEditItem extends Component {
         case FIELDS.DATE.type:
           return (
             <DateField
+                field={this.state.field}
+                hideTab={true}
+                translations={this.props.translations}
+                onFieldChange={this.onFieldChange.bind(this)}
+            />
+          );
+        case FIELDS.COLOR.type:
+          return (
+            <ColorField
                 field={this.state.field}
                 hideTab={true}
                 translations={this.props.translations}

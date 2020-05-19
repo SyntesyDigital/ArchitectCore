@@ -3,12 +3,10 @@
 namespace Modules\Architect\Fields;
 
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
-
 use Modules\Architect\Entities\Media;
 use Modules\Architect\Entities\Content;
 use Modules\Architect\Entities\Typology;
 use Modules\Architect\Entities\Language;
-use Modules\Architect\Fields\FieldConfig;
 
 class FieldsReactAdapter
 {
@@ -18,22 +16,21 @@ class FieldsReactAdapter
 
     public function __construct($object)
     {
-        if(get_class($object) == "Modules\Architect\Entities\Typology") {
+        if (get_class($object) == "Modules\Architect\Entities\Typology") {
             $this->typology = $object->load('fields');
         }
 
-        if(get_class($object) == "Modules\Architect\Entities\Content") {
+        if (get_class($object) == "Modules\Architect\Entities\Content") {
             $this->content = $object->load('fields');
         }
 
         $this->languages = Language::getAllCached();
     }
 
-
     private function getLanguageIsoFromId($id)
     {
-        foreach($this->languages as $language) {
-            if($language->id == $id) {
+        foreach ($this->languages as $language) {
+            if ($language->id == $id) {
                 return $language->iso;
             }
         }
@@ -46,24 +43,24 @@ class FieldsReactAdapter
     */
     public function get()
     {
-        if($this->content) {
+        if ($this->content) {
             $fields = $this->content->typology->fields;
         }
 
-        if($this->typology) {
+        if ($this->typology) {
             $fields = $this->typology->fields;
         }
 
-        foreach($fields as &$typologyField) {
-            if($this->content) {
-                foreach($this->content->fields as $k => $contentField) {
-                    if($typologyField->identifier == $contentField->name) {
+        foreach ($fields as &$typologyField) {
+            if ($this->content) {
+                foreach ($this->content->fields as $k => $contentField) {
+                    if ($typologyField->identifier == $contentField->name) {
                         $this->build($typologyField, $contentField);
                     }
                 }
             }
 
-            if(!isset($typologyField->value)) {
+            if (!isset($typologyField->value)) {
                 $typologyField->value = null;
                 $this->fields[$typologyField->identifier] = $typologyField;
             }
@@ -72,23 +69,22 @@ class FieldsReactAdapter
         return new EloquentCollection($this->fields);
     }
 
-
-
     private function build($typologyField, $contentField)
     {
-        switch($typologyField->type) {
+        switch ($typologyField->type) {
             // Translatable fields
             case 'richtext':
             case 'slug':
+            case 'color':
             case 'text':
                 $iso = $this->getLanguageIsoFromId($contentField->language_id);
                 $values = isset($this->fields[$typologyField->identifier]) ? $this->fields[$typologyField->identifier]->value : null;
 
-                if($values) {
+                if ($values) {
                     $values[$iso] = $contentField->value;
                 } else {
                     $values = [
-                        $iso => $contentField->value
+                        $iso => $contentField->value,
                     ];
                 }
 
@@ -108,11 +104,11 @@ class FieldsReactAdapter
                 $iso = $this->getLanguageIsoFromId($contentField->language_id);
                 $values = isset($this->fields[$typologyField->identifier]) ? $this->fields[$typologyField->identifier]->value : null;
 
-                if($values) {
+                if ($values) {
                     $values[$iso] = Media::find($contentField->value);
                 } else {
                     $values = [
-                        $iso => Media::find($contentField->value)
+                        $iso => Media::find($contentField->value),
                     ];
                 }
 
@@ -141,20 +137,18 @@ class FieldsReactAdapter
                 $values = null;
                 $childs = $this->content->getFieldChilds($contentField);
 
-                if($childs != null){
-                  foreach($childs as $k => $v) {
-                      if($v->language_id) {
-                          $iso = $this->getLanguageIsoFromId($v->language_id);
-                          $values[ explode('.', $v->name)[1] ][$iso] = $v->value;
-                      } else {
-                          if(explode('.', $v->name)[1] == 'content') {
-                              $values[ explode('.', $v->name)[1] ] = Content::find($v->value);
-                          }
-                      }
-                  }
+                if ($childs != null) {
+                    foreach ($childs as $k => $v) {
+                        if ($v->language_id) {
+                            $iso = $this->getLanguageIsoFromId($v->language_id);
+                            $values[explode('.', $v->name)[1]][$iso] = $v->value;
+                        } else {
+                            if (explode('.', $v->name)[1] == 'content') {
+                                $values[explode('.', $v->name)[1]] = Content::find($v->value);
+                            }
+                        }
+                    }
                 }
-
-
 
                 $typologyField->value = $values;
             break;
@@ -164,10 +158,10 @@ class FieldsReactAdapter
 
                 $childs = $this->content->getFieldChilds($contentField);
 
-                if($childs != null){
-                  foreach($childs as $k => $v) {
-                    $values[explode('.', $v->name)[1]][ explode('.', $v->name)[2] ] = $v->value;
-                  }
+                if ($childs != null) {
+                    foreach ($childs as $k => $v) {
+                        $values[explode('.', $v->name)[1]][explode('.', $v->name)[2]] = $v->value;
+                    }
                 }
 
                 $typologyField->value = $values;
@@ -178,13 +172,13 @@ class FieldsReactAdapter
                 $values = null;
                 $childs = $this->content->getFieldChilds($contentField);
 
-                if($childs != null){
-                  foreach($childs as $k => $v) {
-                      if($v->language_id) {
-                          $iso = $this->getLanguageIsoFromId($v->language_id);
-                          $values[ explode('.', $v->name)[1] ][$iso] = $v->value;
-                      }
-                  }
+                if ($childs != null) {
+                    foreach ($childs as $k => $v) {
+                        if ($v->language_id) {
+                            $iso = $this->getLanguageIsoFromId($v->language_id);
+                            $values[explode('.', $v->name)[1]][$iso] = $v->value;
+                        }
+                    }
                 }
 
                 $typologyField->value = $values;
@@ -193,7 +187,7 @@ class FieldsReactAdapter
             default:
                 $values = isset($typologyField->value) ? $typologyField->value : $contentField->value;
 
-                if($values && !is_array($values)) {
+                if ($values && !is_array($values)) {
                     $values = [$values];
                     $values[] = $contentField->value;
                 }
@@ -204,8 +198,4 @@ class FieldsReactAdapter
 
         $this->fields[$typologyField->identifier] = $typologyField;
     }
-
-
-
 }
-?>
