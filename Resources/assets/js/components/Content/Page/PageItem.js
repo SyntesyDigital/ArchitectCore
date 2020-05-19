@@ -200,6 +200,7 @@ class PageItem extends Component {
     switch (this.props.data.field.type) {
       case FIELDS.TEXT.type:
         return this.renderTextPreview();
+      case FIELDS.MULTIMEDIA.type:
       case FIELDS.RICHTEXT.type:
         return this.renderRichTextPreview();
       case FIELDS.IMAGE.type:

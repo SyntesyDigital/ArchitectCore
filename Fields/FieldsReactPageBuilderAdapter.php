@@ -101,6 +101,7 @@ class FieldsReactPageBuilderAdapter
             case 'richtext':
             case 'slug':
             case 'color':
+            case 'multimedia':
             case 'text':
                 return ContentField::where('name', $fieldName)
                     ->where('content_id', $this->content->id)

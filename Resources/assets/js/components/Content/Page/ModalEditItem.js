@@ -4,6 +4,7 @@ import { render } from 'react-dom';
 // CONTENT FIELDS
 import TextField from './../ContentFields/TextField';
 import RichTextField from './../ContentFields/RichTextField';
+import MultimediaField from './../ContentFields/MultimediaField';
 import ImageField from './../ContentFields/ImageField';
 import DateField from './../ContentFields/DateField';
 import ColorField from './../ContentFields/ColorField';
@@ -585,6 +586,16 @@ class ModalEditItem extends Component {
             translations={this.props.translations}
             onFieldChange={this.onFieldChange.bind(this)}
 
+          />
+        );
+      case FIELDS.MULTIMEDIA.type:
+        return (
+          <MultimediaField
+            //errors={_this.props.errors[k]}
+            field={this.state.field}
+            hideTab={true}
+            translations={this.props.translations}
+            onFieldChange={this.onFieldChange.bind(this)}
           />
         );
         case FIELDS.IMAGE.type:

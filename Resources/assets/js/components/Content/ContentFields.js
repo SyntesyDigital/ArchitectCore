@@ -4,6 +4,7 @@ import { render } from 'react-dom';
 import TextField from './ContentFields/TextField';
 import SlugField from './ContentFields/SlugField';
 import RichTextField from './ContentFields/RichTextField';
+import MultimediaField from './ContentFields/MultimediaField';
 import ImageField from './ContentFields/ImageField';
 import FileField from './ContentFields/FileField';
 import TranslatedFileField from './ContentFields/TranslatedFileField';
@@ -86,6 +87,19 @@ class ContentFields extends Component {
                     translations={_this.props.translations}
                     key={k}
                     onFieldChange={_this.props.onFieldChange}
+                />
+                );
+            break;
+
+            case FIELDS.MULTIMEDIA.type:
+                fields.push(
+                <MultimediaField
+                    errors={_this.props.errors[k]}
+                    field={_this.props.fields[k]}
+                    translations={_this.props.translations}
+                    key={k}
+                    onFieldChange={_this.props.onFieldChange}
+                    onImageSelect={_this.props.onImageSelect}
                 />
                 );
             break;

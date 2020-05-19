@@ -102,13 +102,14 @@ class ContentContainer extends Component {
 
   /******** Images  ********/
 
-  handleImageSelect(identifier,language) {
-      console.log('handleImageSelect => ', identifier);
+  handleImageSelect(identifier,language,callback) {
+    console.log('handleImageSelect (identifier,language,callback)', identifier,language,callback);
 
     this.setState({
       displayMediaModal : true,
       sourceField : identifier,
-      sourceLanguage : language !== undefined ? language : null
+      sourceLanguage : language !== undefined ? language : null,
+      mediaSelectCallback : callback
     });
 
   }
@@ -122,7 +123,26 @@ class ContentContainer extends Component {
   }
 
   handleImageSelected(media){
-      this.updateImage(this.state.sourceField,media);
+      //if callback is defined then execute callback instead of
+      if(this.state.mediaSelectCallback !== undefined && this.state.mediaSelectCallback != null){
+        this.executeImageCallback(media);
+      }
+      else {
+        this.updateImage(this.state.sourceField,media);
+      }
+  }
+
+  executeImageCallback(media){
+
+    this.state.mediaSelectCallback(media);
+
+    this.setState({
+      displayMediaModal : false,
+      sourceField : null,
+      sourceLanguage : null,
+      mediaSelectCallback : null
+    });
+
   }
 
   updateImage(field,media){
@@ -154,7 +174,8 @@ class ContentContainer extends Component {
       fields : fields,
       displayMediaModal : false,
       sourceField : null,
-      sourceLanguage : null
+      sourceLanguage : null,
+      mediaSelectCallback : null
     });
 
   }
