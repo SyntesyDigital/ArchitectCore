@@ -13,9 +13,15 @@ class ColorField extends Component {
 
     this.state = {
       displayColorPicker: false,
-      color: this.props.field.value?this.props.field.value[0]:'F0EBB0',
+      color: this.props.field.value?this.props.field.value[0]:colors[0],
       colors: colors
     };
+  }
+  
+  componentDidMount(){
+    var color  = { hex: this.state.color};
+
+    this.handleOnChange(color);
   }
 
   handleOnChange(color) {
