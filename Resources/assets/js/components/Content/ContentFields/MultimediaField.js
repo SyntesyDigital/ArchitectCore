@@ -98,8 +98,8 @@ class MultimediaField extends Component {
 
                     document.addEventListener('insert-media-'+editor.id,function(e){
                       
-                      self.props.onImageSelect(self.props.field,key,function(media){
-                        var url = media.urls.large !== undefined ? media.urls.large : media.urls.original;
+                      self.props.onImageSelect(self.props.field,key,function(media, crop){
+                        var url = crop !== undefined? media.urls[crop] : media.urls.original;
                         console.log("MultiMediaField :: onImageSelect callback : ",ASSETS+url);
                         self.insertImage(editor,ASSETS+url);
                       });

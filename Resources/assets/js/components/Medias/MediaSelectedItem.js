@@ -14,7 +14,8 @@ class MediaSelectedItem extends Component {
 
         this.state = {
           media : null,
-          image : null
+          image : null,
+          crop  : 'original'
         };
 
         if(props.selectedItem != null){
@@ -22,6 +23,7 @@ class MediaSelectedItem extends Component {
         }
 
         this.onSubmit = this.onSubmit.bind(this);
+        this.handleChangeCrop = this.handleChangeCrop.bind(this);
 
     }
 
@@ -47,7 +49,7 @@ class MediaSelectedItem extends Component {
 
               if(media.type == "image"){
                 var image = {
-                    url: '/storage/medias/original/' + media.stored_filename,
+                    url: '/storage/medias/'+this.state.crop+'/' + media.stored_filename,
                     width: media.metadata.dimension.split('x')[0] ? media.metadata.dimension.split('x')[0] : 0,
                     height: media.metadata.dimension.split('x')[1] ? media.metadata.dimension.split('x')[1] : 0,
                     formats: []
@@ -65,9 +67,21 @@ class MediaSelectedItem extends Component {
 
     }
 
+    handleChangeCrop(value){
+      console.log("MediaSelectItem :: handleChangeCrop => ",value);
+      this.setState({
+        crop: value,
+      });
+      this.loadMedia(this.props.selectedItem);
+
+     /* if(item != null){
+        this.props.onContentSelected(this.processContent(item));
+      }*/
+    }
+
     onSubmit(e) {
       e.preventDefault();
-      this.props.onMediaSelected(this.state.media);
+      this.props.onMediaSelected(this.state.media, this.state.crop);
     }
 
     render() {
@@ -85,6 +99,9 @@ class MediaSelectedItem extends Component {
                   filesize={this.state.media.metadata.filesize+" KB"}
                   author={this.state.media.author.firstname+" "+this.state.media.author.lastname}
                   onEdit={this.props.onImageEdit}
+                  showCropSelector={this.props.showCropSelector}
+                  handleChangeCrop={this.handleChangeCrop}
+                  crop={this.state.crop}
                 />
               }
 

@@ -122,19 +122,19 @@ class ContentContainer extends Component {
     });
   }
 
-  handleImageSelected(media){
+  handleImageSelected(media, crop){
       //if callback is defined then execute callback instead of
       if(this.state.mediaSelectCallback !== undefined && this.state.mediaSelectCallback != null){
-        this.executeImageCallback(media);
+        this.executeImageCallback(media, crop);
       }
       else {
-        this.updateImage(this.state.sourceField,media);
+        this.updateImage(this.state.sourceField,media,crop);
       }
   }
 
-  executeImageCallback(media){
+  executeImageCallback(media, crop){
 
-    this.state.mediaSelectCallback(media);
+    this.state.mediaSelectCallback(media,crop);
 
     this.setState({
       displayMediaModal : false,
@@ -516,6 +516,7 @@ class ContentContainer extends Component {
           onImageSelected={this.handleImageSelected}
           onImageCancel={this.handleImageCancel}
           mediaType={mediaType}
+          showCropSelector={true}
         />
 
         <ContentSelectModal

@@ -18,7 +18,8 @@ class MediaSelectModal extends Component {
 
         this.state = {
           imageSelected : null,
-          isOpen : false
+          isOpen : false,
+          showCropSelector : this.props.showCropSelector? this.props.showCropSelector:false
         };
 
         this._dropzone = null;
@@ -254,8 +255,11 @@ class MediaSelectModal extends Component {
       })
     }
 
-    handleMediaSelected(media){
-      this.props.onImageSelected(media);
+    handleMediaSelected(media, crop){
+      console.log('handleMediaSelected  MEEEDIA', media)
+      console.log('handleMediaSelected  CROP', crop)
+
+      this.props.onImageSelected(media,crop);
     }
 
     handleImageEdit(e) {
@@ -365,6 +369,7 @@ class MediaSelectModal extends Component {
                               selectedItem={this.state.imageSelected}
                               onCancelImage={this.handleCancelImage}
                               onMediaSelected={this.handleMediaSelected}
+                              showCropSelector={this.state.showCropSelector}
                             />
                           </div>
                         }

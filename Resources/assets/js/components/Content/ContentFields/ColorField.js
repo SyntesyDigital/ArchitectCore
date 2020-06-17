@@ -9,7 +9,7 @@ class ColorField extends Component {
     super(props);
     console.log('FIELD VALUE',this.props.field);
     this.handleOnChange = this.handleOnChange.bind(this);
-    const colors = ['#F0EBB0', '#FFDDE2', '#BFE3ED'];
+    const colors = ['#FFFDB1', '#FFDDE2', '#BFE3ED'];
 
     this.state = {
       displayColorPicker: false,
