@@ -24,7 +24,7 @@ class CreateMediaRequest extends FormRequest
     public function rules()
     {
         return [
-            'file' => 'required|mimes:jpg,jpeg,png,pdf,doc',
+            'file' => 'required|mimes:jpg,jpeg,png,pdf,doc,gif',
         ];
     }
 }
